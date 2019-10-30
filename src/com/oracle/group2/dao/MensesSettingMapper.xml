@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3.dtd">
+
+<mapper namespace="com.oracle.group3.dao.MensesSettingMapper">
+	<resultMap type="com.oracle.group3.domain.MensesSetting" id="mensesSetting">
+	</resultMap>
+	<insert id="insertSetting">
+		insert into mensessetting (uid,interval_day,last_day) values (#{0},#{1},#{2});
+	</insert>
+	<select id="getMensesSettingById" resultMap="mensesSetting">
+		select * from mensessetting where uid = #{0};
+	</select>
+	<update id="updateSetting">
+		update mensessetting set interval_day = #{1}, last_day = #{2} where uid = #{0};
+	</update>
+</mapper>

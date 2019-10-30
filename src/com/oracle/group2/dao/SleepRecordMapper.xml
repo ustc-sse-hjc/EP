@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3.dtd">
+ <mapper namespace="com.oracle.group3.dao.SleepRecordMapper">
+ <resultMap type="com.oracle.group3.domain.SleepRecord" id="sleeprecord">  
+  </resultMap> 
+  <insert id="saveSleepTime" >
+		insert into
+		sleeptime(uid,start)
+		values(#{0},#{1})
+	</insert>
+ <select id = "getSleepTime" resultMap = "sleeprecord">
+ select * from sleeptime
+ where start = #{1} and uid = #{0};
+ </select>
+ <select id = "getSleepTimeByDay" resultMap = "sleeprecord">
+ select * from sleeptime
+ <where> 
+    time &gt;= #{2} and time &lt;= #{3} and uid=#{0} and start = #{1}
+</where>
+ </select>
+ </mapper>

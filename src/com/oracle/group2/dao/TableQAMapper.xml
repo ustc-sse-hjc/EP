@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3.dtd">
+
+<mapper namespace="com.oracle.group3.dao.TableQAMapper">
+
+	<select id="getQAById" resultType="TableQA"> 
+	 	select * from table_QA 
+		where table_QA_id between #{0} and #{1}
+	</select> 
+	<!-- <![CDATA[
+	<select id="getQAById" resultType="TableQA">
+		select * from table_QA
+		where table_QA_id>=#{0} && table_QA_id<=#{1};
+	</select>
+	]]> -->
+</mapper>
