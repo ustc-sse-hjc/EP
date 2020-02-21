@@ -16,7 +16,7 @@
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 配置组件扫描 -->
-	<context:component-scan base-package="com.oracle.group2.*"/>
+	<context:component-scan base-package="com.ustc.group2"/>
 
 	<!-- 配置处理器映射器HandlerMapping和处理器适配器HandlerAdapter -->
 	<mvc:annotation-driven/>
@@ -26,7 +26,7 @@
 	 <!-- 数据库配置信息 -->
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
          <property name="jndiName">
-             <value>java:comp/env/jdbc/Group3</value>
+             <value>java:comp/env/jdbc/Group2</value>
          </property>
      </bean>
 
@@ -35,13 +35,13 @@
 	 	<!-- 注入数据源 -->
 	 	<property name="dataSource" ref="dataSource"/>
 	 	<!-- 指明实体类所在的包 -->
-	 	<property name="typeAliasesPackage" value="com.oracle.group2.domain"/>
+	 	<property name="typeAliasesPackage" value="com.ustc.group2.domain"/>
 	 	<!-- 指明Mybatis主配置文件所在的路径 -->
 		<property name="configLocation" value="/WEB-INF/config.xml"/>
 	 </bean>
 	 <!-- 3，配置MapperFactoryBean: 两种方式 -->
 	 <!-- 3.1(常用) 扫描的方式  -->
      <bean id="mapperScan" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-     		<property name="basePackage" value="com.oracle.group2.dao"/>
+     		<property name="basePackage" value="com.ustc.group2.dao"/>
      </bean>
 </beans>
