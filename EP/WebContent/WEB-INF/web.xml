@@ -54,6 +54,88 @@
     <servlet-name>SpringMVC</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  
+  <!-- Joe Li -->
+    <servlet>
+    <description>验证码</description>
+    <servlet-name>VerifiedCodeServlet</servlet-name>
+    <servlet-class>com.jixiaokaohe.programmar.servlet.VerifiedCodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VerifiedCodeServlet</servlet-name>
+    <url-pattern>/VerifiedCodeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>登录验证</description>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.jixiaokaohe.programmar.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<description>登录后的界面显示</description>
+    <servlet-name>SystemServlet</servlet-name>
+    <servlet-class>com.jixiaokaohe.programmar.servlet.SystemServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SystemServlet</servlet-name>
+    <url-pattern>/SystemServlet</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<description>信息管理</description>
+    <servlet-name>toemploylistServlet</servlet-name>
+    <servlet-class>com.jixiaokaohe.programmar.servlet.toemploylistServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<description>系统 管理</description>
+    <servlet-name>PersonalServlet</servlet-name>
+    <servlet-class>com.jixiaokaohe.programmar.servlet.PersonalServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>todeptlistServlet</servlet-name>
+    <servlet-class>com.jixiaokaohe.programmar.servlet.todeptlistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>toemploylistServlet</servlet-name>
+    <url-pattern>/toemploylistServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PersonalServlet</servlet-name>
+    <url-pattern>/PersonalServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>todeptlistServlet</servlet-name>
+    <url-pattern>/todeptlistServlet</url-pattern>
+  </servlet-mapping>
+  
+    <filter>
+    <display-name>登录状态拦截</display-name>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.jixiaokaohe.programmar.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/SystemServlet</url-pattern>
+	<url-pattern>/toemploylistServlet</url-pattern>
+    <url-pattern>/LeaderServlet</url-pattern>
+    
+  </filter-mapping>
+  
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/500.jsp</location>
+  </error-page>
+  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
