@@ -70,7 +70,7 @@ public class PersonalServlet extends HttpServlet {
 
 	private void personalView(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/personalView.jsp").forward(request, response);
+		request.getRequestDispatcher("/view-Joeli/personalView.jsp").forward(request, response);
 	}
 	
 }

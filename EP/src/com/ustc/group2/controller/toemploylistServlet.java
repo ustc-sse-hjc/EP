@@ -31,6 +31,6 @@ public class toemploylistServlet extends HttpServlet {
 
 	private void toemployList(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		request.getRequestDispatcher("/WEB-INF/view/employlist.jsp").forward(request,response);	
+		request.getRequestDispatcher("/view-Joeli/employlist.jsp").forward(request,response);	
 	}
 }

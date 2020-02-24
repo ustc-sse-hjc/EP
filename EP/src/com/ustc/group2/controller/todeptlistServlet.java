@@ -41,10 +41,11 @@ public class todeptlistServlet extends HttpServlet {
 
 	private void todeptList(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/deptlist.jsp").forward(request,response);
+		request.getRequestDispatcher("/view-Joeli/deptlist.jsp").forward(request,response);
 		
 	}
 	private void getDeptList(HttpServletRequest request,HttpServletResponse response){
+		//逻辑有问题，一开始name肯定是undefined。
 		String name = request.getParameter("deptName");
 		Integer currentPage = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
 		Integer pageSize = request.getParameter("rows") == null ? 999 : Integer.parseInt(request.getParameter("rows"));

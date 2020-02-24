@@ -57,7 +57,7 @@
   
   
   <!-- Joe Li -->
-    <servlet>
+  <servlet>
     <description>验证码</description>
     <servlet-name>VerifiedCodeServlet</servlet-name>
     <servlet-class>com.ustc.group2.controller.VerifiedCodeServlet</servlet-class>
@@ -93,7 +93,7 @@
   </servlet>
   
   <servlet>
-  	<description>系统 管理</description>
+  	<description>系统管理</description>
     <servlet-name>PersonalServlet</servlet-name>
     <servlet-class>com.ustc.group2.controller.PersonalServlet</servlet-class>
   </servlet>
@@ -114,7 +114,7 @@
     <url-pattern>/todeptlistServlet</url-pattern>
   </servlet-mapping>
   
-    <filter>
+  <filter>
     <display-name>登录状态拦截</display-name>
     <filter-name>LoginFilter</filter-name>
     <filter-class>com.ustc.group2.filter.LoginFilter</filter-class>

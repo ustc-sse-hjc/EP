@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.Null;
+
 import com.ustc.group2.domain.Dept;
 import com.ustc.group2.domain.Page;
 
@@ -21,7 +23,9 @@ public class DeptDao extends BaseDao {
 	public List getDeptList(Dept dept,Page page){
 		List<Dept>ret = new ArrayList<Dept>();
 		String sql = "select * from dept ";
-		if(!(dept.getName().isEmpty())){
+		
+		//一开始dept的name是undifined，不能用.isempty()判空，判空不是这么判的
+		if(!(dept.getName()==null)){
 			sql += "where name like '%" + dept.getName() + "%'";
 		}
 		sql += " limit " + page.getStart() + "," + page.getPageSize();
@@ -43,7 +47,8 @@ public class DeptDao extends BaseDao {
 		int total = 0;
 		String sql = "select count(*)as total from dept ";
 		
-		if(!(dept.getName().isEmpty())){
+		//一开始dept的name是undifined，不能用.isempty()判空，判空不是这么判的
+		if(!(dept.getName()==null)){
 			sql += "where name like '%" + dept.getName() + "%'";
 		}
 		ResultSet resultSet = query(sql);

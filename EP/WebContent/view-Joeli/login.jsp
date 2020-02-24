@@ -34,6 +34,7 @@
 		});
 		
 		//登录
+		$("#submitBtn").click(function(){
 			var data = $("#form").serialize();
 			$.ajax({
 				type: "post",
@@ -64,6 +65,7 @@
 			radioClass: 'iradio-blue',
 			increaseArea: '25%'
 		});
+	})
 </script> 
 <title>登录|员工绩效考核系统</title>
 <meta name="keywords" content="员工绩效考核系统">
@@ -79,13 +81,13 @@
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
-          <input id="" name="account" type="text" placeholder="账户" class="input-text size-L">
+          <input id="" name="account" type="text" required="required" placeholder="账户" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-8">
-          <input id="" name="password" type="password" placeholder="密码" class="input-text size-L">
+          <input id="" name="password" type="password" required="required" placeholder="密码" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">

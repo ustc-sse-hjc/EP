@@ -24,7 +24,7 @@ public class SystemServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		try{
-		request.getRequestDispatcher("/WEB-INF/view/system.jsp").forward(request,response);
+		request.getRequestDispatcher("/view-Joeli/system.jsp").forward(request,response);
 		}catch(ServletException e){
 			e.printStackTrace();
 		}

@@ -41,8 +41,12 @@ public class LoginServlet extends HttpServlet {
 		String password=request.getParameter("password");
 		String loginVcode=(String)request.getSession().getAttribute("loginVcode");
 		int type=Integer.parseInt(request.getParameter("type"));
+		System.out.println(vcode);
+		System.out.println(loginVcode);
+		System.out.println("type: "+type);
 		if(vcode.isEmpty()||!vcode.equalsIgnoreCase(loginVcode)){
 			response.getWriter().write("vcodeError");
+			System.out.println("1");
 			return;
 		}
 		//验证码验证通过，对比用户名是否正确
@@ -51,9 +55,11 @@ public class LoginServlet extends HttpServlet {
 		case 1:{
 			AdminDao adminDao=new AdminDao();
 			Admin admin=adminDao.login(name,password);
+			
 			adminDao.closeCon();
 			if(admin==null)
 			{
+				System.out.println("ERROR");
 				response.getWriter().write("loginError");
 				return;
 			}
@@ -61,12 +67,13 @@ public class LoginServlet extends HttpServlet {
 			request.getSession().setAttribute("user",admin);
 			request.getSession().setAttribute("userType",type);
 			loginStatus = "loginSuccess";
+			
 			break;
 		}
 		default:
 			break;
 		}
-		response.getWriter().write(loginStatus);		
+		response.getWriter().write(loginStatus);	
 	}
 	
 	private void logout(HttpServletRequest request,HttpServletResponse response) throws IOException{
