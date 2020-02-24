@@ -1,4 +1,4 @@
-package com.jixiaokaohe.programmar.util;
+package com.ustc.group2.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,9 +11,9 @@ import java.sql.SQLException;
  */
 
 public class DbUtil {
-	private String dbUrl="jdbc:mysql://localhost:3306/jixiaokaohe?useUnicode=true&characterEncoding=UTF-8";
+	private String dbUrl="jdbc:mysql://localhost:3306/Group2?useUnicode=true&characterEncoding=UTF-8";
 	private String dbUer="root";
-	private String dbPassword="19971028";
+	private String dbPassword="0000";
 	private String jdbcName="com.mysql.jdbc.Driver";
 	private Connection connection=null;
 	

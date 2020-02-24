@@ -60,7 +60,7 @@
     <servlet>
     <description>验证码</description>
     <servlet-name>VerifiedCodeServlet</servlet-name>
-    <servlet-class>com.jixiaokaohe.programmar.servlet.VerifiedCodeServlet</servlet-class>
+    <servlet-class>com.ustc.group2.controller.VerifiedCodeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>VerifiedCodeServlet</servlet-name>
@@ -69,12 +69,12 @@
   <servlet>
     <description>登录验证</description>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.jixiaokaohe.programmar.servlet.LoginServlet</servlet-class>
+    <servlet-class>com.ustc.group2.controller.LoginServlet</servlet-class>
   </servlet>
   <servlet>
   	<description>登录后的界面显示</description>
     <servlet-name>SystemServlet</servlet-name>
-    <servlet-class>com.jixiaokaohe.programmar.servlet.SystemServlet</servlet-class>
+    <servlet-class>com.ustc.group2.controller.SystemServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -89,17 +89,17 @@
    <servlet>
   	<description>信息管理</description>
     <servlet-name>toemploylistServlet</servlet-name>
-    <servlet-class>com.jixiaokaohe.programmar.servlet.toemploylistServlet</servlet-class>
+    <servlet-class>com.ustc.group2.controller.toemploylistServlet</servlet-class>
   </servlet>
   
   <servlet>
   	<description>系统 管理</description>
     <servlet-name>PersonalServlet</servlet-name>
-    <servlet-class>com.jixiaokaohe.programmar.servlet.PersonalServlet</servlet-class>
+    <servlet-class>com.ustc.group2.controller.PersonalServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>todeptlistServlet</servlet-name>
-    <servlet-class>com.jixiaokaohe.programmar.servlet.todeptlistServlet</servlet-class>
+    <servlet-class>com.ustc.group2.controller.todeptlistServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>toemploylistServlet</servlet-name>
@@ -117,7 +117,7 @@
     <filter>
     <display-name>登录状态拦截</display-name>
     <filter-name>LoginFilter</filter-name>
-    <filter-class>com.jixiaokaohe.programmar.filter.LoginFilter</filter-class>
+    <filter-class>com.ustc.group2.filter.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
@@ -135,8 +135,4 @@
     <error-code>500</error-code>
     <location>/500.jsp</location>
   </error-page>
-  
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
 </web-app>

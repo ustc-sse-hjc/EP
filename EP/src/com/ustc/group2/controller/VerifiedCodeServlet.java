@@ -1,4 +1,4 @@
-package com.jixiaokaohe.programmar.servlet;
+package com.ustc.group2.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jixiaokaohe.programmar.util.VerifiedCodeUtil;
+import com.ustc.group2.util.VerifiedCodeUtil;
 
 /**
  * 用于生成验证码

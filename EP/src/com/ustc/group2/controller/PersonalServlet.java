@@ -1,4 +1,4 @@
-package com.ustc.group2.service;
+package com.ustc.group2.controller;
 
 import java.io.IOException;
 
