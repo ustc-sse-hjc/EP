@@ -124,7 +124,6 @@
     <url-pattern>/SystemServlet</url-pattern>
 	<url-pattern>/toemploylistServlet</url-pattern>
     <url-pattern>/LeaderServlet</url-pattern>
-    
   </filter-mapping>
   
   <error-page>
