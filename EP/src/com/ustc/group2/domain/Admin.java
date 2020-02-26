@@ -1,6 +1,6 @@
 package com.ustc.group2.domain;
 
-import com.mysql.cj.jdbc.Blob;
+import com.mysql.jdbc.Blob;
 
 /**
  * 人员实体类
