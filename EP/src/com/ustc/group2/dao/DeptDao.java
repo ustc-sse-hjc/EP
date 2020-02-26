@@ -33,7 +33,7 @@ public class DeptDao extends BaseDao {
 		try {
 			while(resultSet.next()){
 				Dept d1 = new Dept();
-				d1.setId(resultSet.getInt("id"));
+				d1.setId(resultSet.getString("id"));
 				d1.setName(resultSet.getString("name"));
 				d1.setleader(resultSet.getString("leader"));
 				ret.add(d1);
@@ -62,16 +62,16 @@ public class DeptDao extends BaseDao {
 		return total;
 	}
 	public boolean addDept(Dept dept){
-		String sql = "insert into s_Dept values(null,'"+dept.getName()+"','"+dept.getleader()+".";
+		String sql = "insert into s_Dept(id,name leader) values('"+dept.getId()+"','"+dept.getName()+"','"+dept.getleader()+"')";
 		return update(sql);
 	}
-	public boolean deleteDept(int id){
+	public boolean deleteDept(String id){
 		String sql = "delete from s_Dept where id = "+id;
 		return update(sql);
 	}
 	public boolean editDept(Dept dept) {
 
-		String sql = "update s_Dept set name = '"+dept.getName()+"',info = '"+dept.getleader()+"' where id = '" + dept.getId()+"'";
+		String sql = "update s_Dept set name = '"+dept.getName()+"',leder = '"+dept.getleader()+"' where id = '" + dept.getId()+"'";
 		return update(sql);
 	}
 	

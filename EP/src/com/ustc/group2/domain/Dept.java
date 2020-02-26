@@ -5,13 +5,13 @@ package com.ustc.group2.domain;
  * 部门实体表
  */
 public class Dept {
-	private int id;
+	private String id;
 	private String name;
 	private String leader;
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

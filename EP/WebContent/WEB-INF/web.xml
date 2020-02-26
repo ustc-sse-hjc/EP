@@ -9,7 +9,7 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-  		/WEB-INF/ApplicationContext.xml
+  			/WEB-INF/ApplicationContext.xml
   	</param-value>
   </context-param>
   <display-name>Group2</display-name>
@@ -124,6 +124,7 @@
     <url-pattern>/SystemServlet</url-pattern>
 	<url-pattern>/toemploylistServlet</url-pattern>
     <url-pattern>/LeaderServlet</url-pattern>
+    
   </filter-mapping>
   
   <error-page>
