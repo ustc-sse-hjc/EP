@@ -10,7 +10,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 
 /**
- * 基础dao,封装基本操作
+ * 鍩虹dao,灏佽鍩烘湰鎿嶄綔
  * @author Joe Li
  */
 public class BaseDao {
@@ -21,11 +21,12 @@ public class BaseDao {
 	}
 	
 	/**
-	 * 基础查询，多条查询
+	 * 鍩虹鏌ヨ锛屽鏉℃煡璇�
 	 * @param sql
 	 * @return
 	 */
 	public ResultSet query(String sql){
+		
 		List<ResultSet> ret=new ArrayList<ResultSet>();
 		try {
 			PreparedStatement prepareStatement = (PreparedStatement) dbUtil.getConnection().prepareStatement(sql);
@@ -37,7 +38,7 @@ public class BaseDao {
 	}
 	
 	/**
-	 * 基础插入操作
+	 * 鍩虹鎻掑叆鎿嶄綔
 	 * @param sql
 	 * @return
 	 */

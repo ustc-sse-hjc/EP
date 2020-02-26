@@ -13,7 +13,7 @@ import com.ustc.group2.domain.Admin;
 
 
 /**
- * 实现管理员密码修改
+ * 瀹炵幇绠＄悊鍛樺瘑鐮佷慨鏀�
  * @author Joe Li
  *
  */
@@ -46,10 +46,10 @@ public class PersonalServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		int userType = Integer.parseInt(request.getSession().getAttribute("userType").toString());
 		if(userType==1){
-			//管理员
+			//绠＄悊鍛�
 		Admin admin =(Admin)request.getSession().getAttribute("user");
 		if(!admin.getPassword().equals(password)){
-			response.getWriter().write("原密码错误");
+			response.getWriter().write("鍘熷瘑鐮侀敊璇�");
 			return;
 		}
 		AdminDao adminDao =new AdminDao();
@@ -63,7 +63,7 @@ public class PersonalServlet extends HttpServlet {
 				adminDao.closeCon();
 			}
 		}else{
-			response.getWriter().write("数据库修改错误");
+			response.getWriter().write("鏁版嵁搴撲慨鏀归敊璇�");
 		}
 	}		
 }

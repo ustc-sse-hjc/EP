@@ -50,9 +50,13 @@
 						$.messager.alert("消息提醒", "用户名或密码错误!", "warning");
 						$("#vcodeImg").click();//切换验证码
 						$("input[name='vcode']").val("");//清空验证码输入框
-					} else if("loginSuccess" == msg){
+					} else if("YuanGong" == msg){//这里应该是员工跳转的功能界面，下面的href在后面的开发中要改
 						window.location.href = "SystemServlet?method=toAdminView";
-					} else {
+					}else if("GuanLiYuan" == msg){//这里是管理员的跳转功能界面，家毅开发了，不需要改
+						window.location.href = "SystemServlet?method=toAdminView";
+					}else if("LingDao" == msg){//这里应该是领导跳转的功能界面，下面的href在后面的开发中要改
+						window.location.href = "SystemServlet?method=toAdminView";
+					}else {
 						alert(msg);
 					}
 				}
@@ -81,13 +85,13 @@
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
-          <input id="" name="account" type="text" required="required" placeholder="账户" class="input-text size-L">
+          <input id="1" name="id" type="text" required="required" placeholder="账户" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-8">
-          <input id="" name="password" type="password" required="required" placeholder="密码" class="input-text size-L">
+          <input id="2" name="password" type="password" required="required" placeholder="密码" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
@@ -96,7 +100,7 @@
           <img title="点击图片切换验证码" id="vcodeImg" src="VerifiedCodeServlet?method=loginVcode"></div>
       </div>
       
-      <div class="mt-20 skin-minimal" style="text-align: center;">
+      <!-- <div class="mt-20 skin-minimal" style="text-align: center;">
 		<div class="radio-box">
 			<input type="radio" id="radio-2" name="type" checked value="2" />
 			<label for="radio-1">员工</label>
@@ -109,7 +113,7 @@
 			<input type="radio" id="radio-1" name="type" value="1" />
 			<label for="radio-3">管理员</label>
 		</div>
-	</div>
+	</div> -->
       
       <div class="row">
         <div class="formControls col-8 col-offset-3">

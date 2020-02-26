@@ -12,11 +12,16 @@ import com.ustc.group2.domain.Admin;
 
 
 /**
- * 登录验证与退出登录的实现
+ * 鐧诲綍楠岃瘉涓庨��鍑虹櫥褰曠殑瀹炵幇
  * @author Joe Li
  *
  */
 public class LoginServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -29,32 +34,34 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		String method=(String)request.getParameter("method");
-		//参数是logout则调用logout方法退出登录
+		//鍙傛暟鏄痩ogout鍒欒皟鐢╨ogout鏂规硶閫�鍑虹櫥褰�
 		if("logout".equals(method)){
 			System.out.println(method);
 			logout(request,response);
 			return;
 		}
-		//验证登录
+		//楠岃瘉鐧诲綍
 		String vcode=request.getParameter("vcode");
-		String name=request.getParameter("account");
+		String id=request.getParameter("id");
 		String password=request.getParameter("password");
 		String loginVcode=(String)request.getSession().getAttribute("loginVcode");
-		int type=Integer.parseInt(request.getParameter("type"));
+		//int type=Integer.parseInt(request.getParameter("type"));//type 是用来表示是员工还是管理员还是领导
 		System.out.println(vcode);
 		System.out.println(loginVcode);
-		System.out.println("type: "+type);
+		System.out.println(password);
+		System.out.println(id);
+		
 		if(vcode.isEmpty()||!vcode.equalsIgnoreCase(loginVcode)){
 			response.getWriter().write("vcodeError");
 			System.out.println("1");
 			return;
 		}
-		//验证码验证通过，对比用户名是否正确
+		//楠岃瘉鐮侀獙璇侀�氳繃锛屽姣旂敤鎴峰悕鏄惁姝ｇ‘
 		String loginStatus = "loginFailed";
-		switch(type){
-		case 1:{
+		//switch(type){
+		//case 1:{
 			AdminDao adminDao=new AdminDao();
-			Admin admin=adminDao.login(name,password);
+			Admin admin=adminDao.login(id,password);
 			
 			adminDao.closeCon();
 			if(admin==null)
@@ -63,21 +70,26 @@ public class LoginServlet extends HttpServlet {
 				response.getWriter().write("loginError");
 				return;
 			}
-			//此时用户名密码正确,向Session中写入属性
+			//姝ゆ椂鐢ㄦ埛鍚嶅瘑鐮佹纭�,鍚慡ession涓啓鍏ュ睘鎬�
 			request.getSession().setAttribute("user",admin);
-			request.getSession().setAttribute("userType",type);
-			loginStatus = "loginSuccess";
+			//request.getSession().setAttribute("userType",type);
+			char [] c=id.toCharArray();
+			if(c[1]=='A')
+				loginStatus = "YuanGong";
+			else if(c[1]=='B')
+				loginStatus = "GuanLiYuan";
+			else loginStatus = "LingDao";
 			
-			break;
-		}
-		default:
-			break;
-		}
+			//break;
+		//}
+		//default:
+			//break;
+	//	}
 		response.getWriter().write(loginStatus);	
 	}
 	
 	private void logout(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		request.getSession().removeAttribute("user");//退出登录后应该移除该属性，并重定向到index.jsp
+		request.getSession().removeAttribute("user");//閫�鍑虹櫥褰曞悗搴旇绉婚櫎璇ュ睘鎬э紝骞堕噸瀹氬悜鍒癷ndex.jsp
 		request.getSession().removeAttribute("userType");
 		response.sendRedirect("index.jsp");
 	}

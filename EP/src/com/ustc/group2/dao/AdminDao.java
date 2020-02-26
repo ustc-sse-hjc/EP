@@ -13,15 +13,23 @@ import com.ustc.group2.domain.Admin;
 
 public class AdminDao extends BaseDao {
 	//登录
-	public Admin login(String name,String password){
-		String sql="select * from  Admin where name= '"+ name +"' and password='"+ password +"'";
+	public Admin login(String id,String password){
+		String sql="select * from  admin where id= '"+ id +"' and password='"+ password +"'";
 		ResultSet resultSet=query(sql);
 		try{
 			if(resultSet.next()){
 				Admin admin=new Admin();
-				admin.setId(resultSet.getInt("id"));
+				admin.setId(resultSet.getString("id"));
 				admin.setName(resultSet.getString("name"));
 				admin.setPassword(resultSet.getString("password"));
+				admin.setSex(resultSet.getString("sex"));
+				admin.setWorkage(resultSet.getInt("workage"));
+				admin.setPhoto(resultSet.getBlob("photo"));
+				admin.setSalary(resultSet.getDouble("salary"));
+				admin.set类别(resultSet.getString("类别"));
+				admin.set联系电话(resultSet.getString("联系电话"));
+				admin.set身份证号码(resultSet.getString("身份证号码"));
+				admin.set邮箱(resultSet.getString("邮箱"));
 				admin.setStatus(resultSet.getInt("status"));
 				return admin;
 			}

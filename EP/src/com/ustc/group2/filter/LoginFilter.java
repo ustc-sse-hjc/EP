@@ -28,6 +28,7 @@ public class LoginFilter implements Filter {
 		HttpServletRequest request=(HttpServletRequest)req;
 		HttpServletResponse response=(HttpServletResponse)rep;
 		Object user=request.getSession().getAttribute("user");
+		//登陆拦截
 		if(user==null){
 			//未登录
 			response.sendRedirect("index.jsp");
