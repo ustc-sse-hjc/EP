@@ -13,12 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.ustc.group2.dao.DeptDao;
 import com.ustc.group2.dao.ItemDao;
 import com.ustc.group2.domain.Dept;
 import com.ustc.group2.domain.Item;
 import com.ustc.group2.domain.Page;
 
 public class toItemListServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -124,14 +131,11 @@ public class toItemListServlet extends HttpServlet {
 			HttpServletResponse response) {
 			//逻辑有问题，一开始name肯定是undefined。
 			String name = request.getParameter("deptName");
-			String quarter = request.getParameter("quarter")==null ? null:request.getParameter("quarter").toString();
 			Integer currentPage = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
 			Integer pageSize = request.getParameter("rows") == null ? 999 : Integer.parseInt(request.getParameter("rows"));
 			Item item = new Item();
 			item.setDept(name);
-			item.setQuarter(quarter);
 			ItemDao itemDao = new ItemDao();
-			@SuppressWarnings("unchecked")
 			List<Dept> itemList = itemDao.getItemList(item,new Page(currentPage, pageSize));
 			int total = itemDao.getItemListTotal(item);
 			itemDao.closeCon();

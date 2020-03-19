@@ -85,10 +85,6 @@
     <servlet-name>SystemServlet</servlet-name>
     <servlet-class>com.ustc.group2.controller.SystemServlet</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>CheckServlet</servlet-name>
-    <servlet-class>com.ustc.group2.controller.CheckServlet</servlet-class>
-  </servlet>
 
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
@@ -97,6 +93,66 @@
   <servlet-mapping>
     <servlet-name>SystemServlet</servlet-name>
     <url-pattern>/SystemServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<description>员工的界面显示</description>
+    <servlet-name>YuangongServlet</servlet-name>
+    <servlet-class>com.ustc.group2.controller.YuangongServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>YuangongServlet</servlet-name>
+    <url-pattern>/YuangongServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<description>员工的信息操作</description>
+    <servlet-name>InfoServlet</servlet-name>
+    <servlet-class>com.ustc.group2.controller.InfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InfoServlet</servlet-name>
+    <url-pattern>/InfoServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<description>员工的日志管理操作</description>
+    <servlet-name>LogServlet</servlet-name>
+    <servlet-class>com.ustc.group2.controller.LogServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogServlet</servlet-name>
+    <url-pattern>/LogServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<description>密码管理</description>
+    <servlet-name>PasswordServlet</servlet-name>
+    <servlet-class>com.ustc.group2.controller.PasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PasswordServlet</servlet-name>
+    <url-pattern>/PasswordServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<description>忘记密码功能A-Saying</description>
+    <servlet-name>PasswordCallbackServlet</servlet-name>
+    <servlet-class>com.ustc.group2.controller.PasswordCallbackServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PasswordCallbackServlet</servlet-name>
+    <url-pattern>/PasswordCallbackServlet</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<description>首页功能A-Saying</description>
+    <servlet-name>WelcomeServlet</servlet-name>
+    <servlet-class>com.ustc.group2.controller.WelcomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WelcomeServlet</servlet-name>
+    <url-pattern>/WelcomeServlet</url-pattern>
   </servlet-mapping>
   
    <servlet>
@@ -115,8 +171,8 @@
     <servlet-class>com.ustc.group2.controller.todeptlistServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>EmployCheckServlet</servlet-name>
-    <servlet-class>com.ustc.group2.controller.EmployCheckServlet</servlet-class>
+    <servlet-name>kaoheServlet</servlet-name>
+    <servlet-class>com.ustc.group2.controller.kaoheServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -132,12 +188,8 @@
     <url-pattern>/todeptlistServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>EmployCheckServlet</servlet-name>
-    <url-pattern>/EmployCheckServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>CheckServlet</servlet-name>
-    <url-pattern>/CheckServlet</url-pattern>
+    <servlet-name>kaoheServlet</servlet-name>
+    <url-pattern>/kaoheServlet</url-pattern>
   </servlet-mapping>
   
   <filter>
@@ -150,7 +202,11 @@
     <url-pattern>/SystemServlet</url-pattern>
 	<url-pattern>/toemploylistServlet</url-pattern>
     <url-pattern>/LeaderServlet</url-pattern>
-    
+      <url-pattern>/InfoServlet</url-pattern>
+    <url-pattern>/YuangongServlet</url-pattern>
+    <url-pattern>/WelcomeServlet</url-pattern>
+    <url-pattern>/LogServlet</url-pattern>
+    <url-pattern>/PasswordServlet</url-pattern>
   </filter-mapping>
   
   <error-page>

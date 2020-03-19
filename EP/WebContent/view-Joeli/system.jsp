@@ -26,16 +26,19 @@
 						{"menuid":"2","icon":"","menuname":"考核项管理",
 							"menus":[
 									{"menuid":"21","menuname":"考核项列表","icon":"icon-user-employer","url":"toItemListServlet?method=toitemlistView"},
-									{"menuid":"21","menuname":"模型审核","icon":"icon-user-employer","url":"CheckServlet?method=toCheckListView"},
 								]
 						},
 						{"menuid":"3","icon":"","menuname":"员工考核",
 							"menus":[
-									{"menuid":"31","menuname":"考核评分","icon":"icon-user-leader","url":"EmployCheckServlet?method=toEpCkview"},
-									{"menuid":"41","menuname":"考核查看","icon":"icon-world","url":"khdetailServlet?method=tokhdetailListView"},
+									{"menuid":"31","menuname":"员工列表","icon":"icon-user-leader","url":"ygkhServlet?method=toygkhListView"},
 								]
 						},
-						{"menuid":"4","icon":"","menuname":"系统管理",
+						{"menuid":"4","icon":"","menuname":"考核查看",
+							"menus":[
+									{"menuid":"41","menuname":"考核记录列表","icon":"icon-world","url":"khdetailServlet?method=tokhdetailListView"},
+								]
+						},
+						{"menuid":"5","icon":"","menuname":"系统管理",
 							"menus":[
 							        {"menuid":"51","menuname":"密码修改","icon":"icon-set","url":"PersonalServlet?method=toPersonalView"}
 								]

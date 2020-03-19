@@ -11,13 +11,12 @@ import com.ustc.group2.domain.Page;
 
 
 public class EmployDao extends BaseDao {
-	
 	public List getEmployList(Employ employ,Page page){
 		List<Employ> ret = new ArrayList<Employ>();
 		String sql = "select * from admin ";
 		
 		if(!(employ.getName()==null)){
-			sql += "and name like '%" + employ.getName() + "%'";
+			sql += "where name like '%" + employ.getName() + "%'";
 		}
 		if(employ.getDeptid() != 0){
 			sql += " and deptid = " + employ.getDeptid();
@@ -64,26 +63,6 @@ public class EmployDao extends BaseDao {
 		}
 		return total;
 	}
-	public boolean addEmploy(Employ employ) {
-			String sql = "insert into admin values('"+employ.getId()+"','"+employ.getName()+"','"+employ.getSex()+"','"+employ.getWorkage()+"','"+employ.getSalary()+"','"+employ.getPassword()+"','"+employ.getIC()+"','"+employ.getType()+"','"+employ.getMobile()+"','"+employ.getEmail()+"','"+employ.getDeptid()+"')";
-			return update(sql);
-		}
-	public boolean deleteEmploy(String idStr) {
-		String sql = "delete from admin where id in("+idStr+")";
-		return update(sql);
-		
-	}
-	public boolean editEmploy(Employ employ) {
-		String sql = "update admin set name = '"+employ.getName()+"'";
-		sql += ",sex = '" + employ.getSex() + "'";
-		sql += ",workage = '" + employ.getWorkage() + "'";
-		sql += ",salary = '" + employ.getSalary() + "'";
-		sql += ",password = '" + employ.getPassword() + "'";
-		sql += ",类别 = '" + employ.getType() + "'";
-		sql += ",联系电话 = '" + employ.getMobile() + "'";
-		sql += ",邮箱 = '" + employ.getEmail() + "'";
-		sql += ",deptid= " + employ.getDeptid();
-		sql += " where id = '" + employ.getId()+"'";
-		return update(sql);
-	}
+	
+
 }

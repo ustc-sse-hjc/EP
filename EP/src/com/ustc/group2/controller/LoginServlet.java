@@ -53,8 +53,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		//楠岃瘉鐮侀獙璇侀�氳繃锛屽姣旂敤鎴峰悕鏄惁姝ｇ‘
 		String loginStatus = "loginFailed";
-		//switch(type){
-		//case 1:{
+		
 			AdminDao adminDao=new AdminDao();
 			Admin admin=adminDao.login(id,password);
 			
@@ -65,8 +64,8 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}
 			//姝ゆ椂鐢ㄦ埛鍚嶅瘑鐮佹纭�,鍚慡ession涓啓鍏ュ睘鎬�
-			request.getSession().setAttribute("user",admin);
-			//request.getSession().setAttribute("userType",type);
+			request.getSession().setAttribute("user",admin);//往进程里面送参数
+			request.getSession().setAttribute("b",id);//往进程里面送参数
 			char [] c=id.toCharArray();
 			if(c[1]=='A')
 				loginStatus = "YuanGong";
@@ -84,7 +83,7 @@ public class LoginServlet extends HttpServlet {
 	
 	private void logout(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		request.getSession().removeAttribute("user");//閫�鍑虹櫥褰曞悗搴旇绉婚櫎璇ュ睘鎬э紝骞堕噸瀹氬悜鍒癷ndex.jsp
-		request.getSession().removeAttribute("userType");
+		
 		response.sendRedirect("index.jsp");
 	}
 	

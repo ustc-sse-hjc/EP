@@ -18,29 +18,22 @@
 	 var _menus = {"menus":[
 						{"menuid":"1","icon":"","menuname":"信息管理",
 							"menus":[
-									{"menuid":"11","menuname":"个人信息管理 ","icon":"icon-exam","url":"toemploylistServlet?method=toemploylistView"},
-									
-									
+									{"menuid":"11","menuname":"个人信息管理 ","icon":"icon-user-leader","url":"InfoServlet?method=toinfoView"},	//icon是用来标识的图标
 								]
 						},
-						{"menuid":"2","icon":"","menuname":"考核项管理",
+						{"menuid":"2","icon":"","menuname":"日志",
 							"menus":[
-									{"menuid":"21","menuname":"考核项列表","icon":"icon-user-employer","url":"kaoheServlet?method=tokaoheListView"},
+									{"menuid":"21","menuname":"日志管理","icon":"icon-user-employer","url":"LogServlet?method=tologView"},
 								]
 						},
-						{"menuid":"3","icon":"","menuname":"员工考核",
+						{"menuid":"3","icon":"","menuname":"绩效考核",
 							"menus":[
-									{"menuid":"31","menuname":"员工列表","icon":"icon-user-leader","url":"ygkhServlet?method=toygkhListView"},
+									{"menuid":"31","menuname":"考核结果查询","icon":"icon-world","url":"ygkhServlet?method=toygkhListView"},
 								]
 						},
-						{"menuid":"4","icon":"","menuname":"考核查看",
+						{"menuid":"4","icon":"","menuname":"系统管理",
 							"menus":[
-									{"menuid":"41","menuname":"考核记录列表","icon":"icon-world","url":"khdetailServlet?method=tokhdetailListView"},
-								]
-						},
-						{"menuid":"5","icon":"","menuname":"系统管理",
-							"menus":[
-							        {"menuid":"51","menuname":"密码修改","icon":"icon-set","url":"PersonalServlet?method=toPersonalView"}
+							        {"menuid":"41","menuname":"信息修改","icon":"icon-set","url":"PasswordServlet?method=toPasswordView"}
 								]
 						}
 				]};
@@ -72,8 +65,9 @@
     </div>
     <div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
         <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
-			<jsp:include page="/view-Joeli/welcome.jsp" />
+			<jsp:include page="/view-A-Saying/welcome.jsp" />
 		</div>
+		
     </div>
 	
 	<iframe width=0 height=0 src="refresh.jsp"></iframe>

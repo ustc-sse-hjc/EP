@@ -5,21 +5,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ustc.group2.domain.Dept;
 import com.ustc.group2.domain.Item;
 import com.ustc.group2.domain.Page;
 
 public class ItemDao extends BaseDao {
 	public List getItemList(Item item,Page page){
 		List<Item>ret = new ArrayList<Item>();
-		String sql = "select * from examination_model";
+		String sql = "select * from examination_model ";
 		if(!(item.getDept()==null)){
-			sql += "and 所属部门 like '%" + item.getDept() + "%'";
-		}  
-		if(!(item.getQuarter()==null)){
-			sql += " and 季度  = '" + item.getQuarter() + "'";
+			sql += "where 所属部门 like '%" + item.getDept() + "%'";
 		}
 		sql += " limit " + page.getStart() + "," + page.getPageSize();
-		ResultSet resultSet = query(sql.replaceFirst("and", "where"));
+		ResultSet resultSet = query(sql);
 		try {
 			while(resultSet.next()){
 				Item m = new Item();
@@ -29,7 +27,6 @@ public class ItemDao extends BaseDao {
 				m.setGoal(resultSet.getString("目标"));
 				m.setPoint(resultSet.getInt("分值"));
 				m.setComment(resultSet.getString("备注"));
-				m.setQuarter(resultSet.getString("季度"));
 				ret.add(m);
 			}
 		} catch (SQLException e) {
@@ -44,12 +41,9 @@ public class ItemDao extends BaseDao {
 		
 		//一开始dept的name是undifined，不能用.isempty()判空，判空不是这么判的
 		if(!(item.getDept()==null)){
-			sql += "and 所属部门 like '%" + item.getDept() + "%'";
+			sql += "where 所属部门 like '%" + item.getDept() + "%'";
 		}
-		if(!(item.getQuarter()==null)){
-			sql += " and 季度 ='" + item.getQuarter() + "'";
-		}
-		ResultSet resultSet = query(sql.replaceFirst("and", "where"));
+		ResultSet resultSet = query(sql);
 		try {
 			while(resultSet.next()){
 				total = resultSet.getInt("total");

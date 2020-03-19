@@ -30,19 +30,16 @@
 	        columns: [[  
 	            //这里的field属性值必须和数据库中的字段值保持一致，不然往集合ret的值往页面上写时顺序就会乱了,id不能少，其他属性和Item实体属性一致；
 				{field:'chk',checkbox: true,width:50},
-				{field:'number',title:'序号',width:60,sortable:true}, 
-				{field:'dept',title:'所属部门',width:100},
- 		        {field:'item',title:'考核项名称',width:150},
- 		        {field:'goal',title:'目标',width:100},
+				{field:'number',title:'序号',width:100,sortable:true}, 
+				{field:'dept',title:'所属部门',width:150},
+ 		        {field:'item',title:'考核项名称',width:200},
+ 		        {field:'goal',title:'目标',width:150},
  		       	{field:'point',title:'分值',width:100},
- 		       	{field:'comment',title:'备注',width:350},
- 		       	{field:'quarter',title:'考核季度',width:200},
+ 		       	{field:'comment',title:'备注',width:460,
+ 		       },
 	 		]], 
-	        toolbar: "#toolbar",
-	        onBeforeLoad:function(){
-	        		preLoadQuarter();					//若出错则执行preLoadClazz项目，将studentList数据加载完
-		        }
-		   }); 
+	        toolbar: "#toolbar"
+	    });
 	    //设置分页控件 
 	    var p = $('#dataList').datagrid('getPager'); 
 	    $(p).pagination({ 
@@ -87,20 +84,6 @@
             }
 	    });
 	    
-	    function preLoadQuarter(){
-	  		$("#quarterList").combobox({			//初始化quarterList的复选框信息
-		  		width: "150",
-		  		height: "25",
-		  		valueField: "quarter",
-		  		textField: "quarter",
-		  		multiple: false, //可多选
-		  		editable: false, //不可编辑
-		  		method: "post",
-		  		url: "CheckServlet?method=CheckList&t="+new Date().getTime()+"&from=combox",
-		  		onChange: function(newValue, oldValue){
-		  		}
-		  	});
-	  	}
 	    
 	  	
 	  	//设置添加考核项窗口
@@ -177,8 +160,7 @@
 	  	//搜索按钮监听事件
 	 		$("#search-btn").click(function(){
 	  		$('#dataList').datagrid('load',{
-	  			deptName: $('#deptName').val(),
-	  			quarter: $("#quarterList").combobox('getText') == '' ? null : $("#quarterList").combobox('getText')
+	  			deptName: $('#deptName').val()
 	  		});
 	  	});
 	  	
@@ -285,8 +267,7 @@
 		<div style="float: left;"><a id="add" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a></div>
 		<div style="float: left; margin-right: 10px;"><a id="edit-btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a></div>
 		<div style="float: left; margin-right: 10px;"><a id="delete" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-some-delete',plain:true">删除</a></div>
-		<div style="float: left;margin-top:4px;">部门名称：<input id="deptName" class="easyui-textbox" name="deptName" /></div>
-		<div style="margin-left: 10px;margin-top:4px;" >&nbsp;&nbsp;季度：<input id="quarterList" class="easyui-textbox" name="quarter" />
+		<div style="margin-top: 3px;">部门名称：<input id="deptName" class="easyui-textbox" name="deptName" />
 			<a id="search-btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
 		</div>
 	</div>

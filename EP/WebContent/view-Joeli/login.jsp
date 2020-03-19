@@ -51,7 +51,7 @@
 						$("#vcodeImg").click();//切换验证码
 						$("input[name='vcode']").val("");//清空验证码输入框
 					} else if("YuanGong" == msg){//这里应该是员工跳转的功能界面，下面的href在后面的开发中要改
-						window.location.href = "SystemServlet?method=toAdminView";
+						window.location.href = "YuangongServlet?method=toYuangongView";
 					}else if("GuanLiYuan" == msg){//这里是管理员的跳转功能界面，家毅开发了，不需要改
 						window.location.href = "SystemServlet?method=toAdminView";
 					}else if("LingDao" == msg){//这里应该是领导跳转的功能界面，下面的href在后面的开发中要改
@@ -63,6 +63,108 @@
 				
 			});
 		});
+		
+		//找回密码功能
+		$("#passwordBtn").click(function(){
+			var data = $("#form").serialize();
+			$.ajax({
+				type: "post",
+				url: "PasswordCallbackServlet?method=getPasswordValidation",
+				data: data, 
+				dataType: "text", //返回数据类型
+				 success: function(msg){
+					
+					if("success"==msg){
+						$("#password_CallbackDialog").dialog("open");
+						
+					}
+					else {
+						$.messager.alert("消息提醒", msg, "warning");
+					}
+					
+					
+				}  
+				
+			});
+			
+			
+			
+			
+	    	
+	    });
+		
+		
+		
+		 //设置找回密码窗口
+	    $("#password_CallbackDialog").dialog({
+	    	title: "找回密码",
+	    	width: 500,
+	    	height: 400,
+	    	iconCls: "icon-search",
+	    	modal: true,
+	    	collapsible: false,
+	    	minimizable: false,
+	    	maximizable: false,
+	    	draggable: true,
+	    	closed: true,
+	    	buttons: [
+	    		{
+					text:'确定',
+					plain: true,
+					iconCls:'icon-find',
+					handler:function(){
+						var validate = $("#callbackForm").form("validate");
+						if(!validate){
+							$.messager.alert("消息提醒","请检查你输入的数据!","warning");
+							return;
+						} else{
+							
+							$.ajax({
+								type: "post",
+								url: "PasswordCallbackServlet?method=getPassword",
+								data: $("#callbackForm").serialize(),
+								success: function(msg){
+									if(msg == "error"){
+										$.messager.alert("消息提醒","找回密码失败!","warning");
+										$("#password_CallbackDialog").dialog("close");
+										$("#answer_1").textbox('setValue', "");
+										$("#answer_2").textbox('setValue', "");
+										$("#answer_3").textbox('setValue', "");
+										
+									} else{
+										$.messager.alert("您的密码是：",msg,"leader");
+										$("#password_CallbackDialog").dialog("close");
+										//清空原表格数据
+										
+										$("#answer_1").textbox('setValue', "");
+										$("#answer_2").textbox('setValue', "");
+										$("#answer_3").textbox('setValue', "");
+										
+									}
+									
+								}
+							});
+						}
+					}
+				},
+				{
+					text:'重置',
+					plain: true,
+					iconCls:'icon-reload',
+					handler:function(){
+						
+						$("#answer_1").textbox('setValue', "");
+						$("#answer_2").textbox('setValue', "");
+						$("#answer_3").textbox('setValue', "");
+						
+						
+					}
+				},
+			],
+			
+	  	 
+	    });
+		 
 		
 		//设置复选框
 		$(".skin-minimal input").iCheck({
@@ -99,32 +201,62 @@
           <input class="input-text size-L" name="vcode" type="text" placeholder="请输入验证码" style="width: 200px;">
           <img title="点击图片切换验证码" id="vcodeImg" src="VerifiedCodeServlet?method=loginVcode"></div>
       </div>
-      
-      <!-- <div class="mt-20 skin-minimal" style="text-align: center;">
-		<div class="radio-box">
-			<input type="radio" id="radio-2" name="type" checked value="2" />
-			<label for="radio-1">员工</label>
-		</div>
-		<div class="radio-box">
-			<input type="radio" id="radio-3" name="type" value="3" />
-			<label for="radio-2">领导</label>
-		</div>
-		<div class="radio-box">
-			<input type="radio" id="radio-1" name="type" value="1" />
-			<label for="radio-3">管理员</label>
-		</div>
-	</div> -->
-      
+        
       <div class="row">
         <div class="formControls col-8 col-offset-3">
           <input id="submitBtn" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+     
+          <input id="passwordBtn" type="button"    style= "background-color:transparent "   class="btn radius size-L" value="&nbsp;忘&nbsp;记&nbsp;密&nbsp;码&nbsp;">
         </div>
+        
       </div>
     </form>
   </div>
 </div>
-<div class="footer">Copyright &nbsp; EP @ 525 </div>
 
+	<!-- 添加窗口 -->
+	<div id="password_CallbackDialog" style="padding: 10px">  
+    	<form id="callbackForm" method="post">
+	    	<table cellpadding="8" >
+	    		<tr>
+	    			<td><h4>问题一:</h4></td>
+	    			<td><h4>${sessionScope.user1.question1}</h4></td>
+	    		</tr>
+	    		<tr>
+	    			<td><h4>答案一:</h4></td>
+	    			<td>
+	    				<input id="answer_1" name="answer_1" style="width: 300px; height: 30px;" class="easyui-textbox" type="text"   data-options="required:true, missingMessage:'不能为空'">
+	    			</td>
+	    		</tr>
+	    		<tr></tr>
+	    		<tr>
+	    			<td><h4>问题二:</h4></td>
+	    			<td><h4>${sessionScope.user1.question2}</h4></td>
+	    		</tr>
+	    		<tr>
+	    			<td><h4>答案二:</h4></td>
+	    			<td>
+	    				<input id="answer_2" name="answer_2" style="width: 300px; height: 30px;" class="easyui-textbox" type="text"   data-options="required:true, missingMessage:'不能为空'">
+	    			</td>
+	    		</tr>
+	    		<br>
+	    		<tr>
+	    			<td><h4>问题三:</h4></td>
+	    			<td><h4>${sessionScope.user1.question3}</h4></td>
+	    		</tr>
+	    		<tr>
+	    			<td><h4>答案三:</h4></td>
+	    			<td>
+	    				<input id="answer_3" name="answer_3" style="width: 300px; height:30px;" class="easyui-textbox" type="text"   data-options="required:true, missingMessage:'不能为空'">
+	    			</td>
+	    		</tr>
+	    		
+	    	</table>
+	    </form>
+	</div>
+
+
+<div class="footer">Copyright &nbsp; EP @ 525 </div>
 
 </body>
 </html>

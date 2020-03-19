@@ -75,7 +75,7 @@ public class Employ {
 	public int getDeptid() {
 		return deptid;
 	}
-	public void setDeptid(Integer deptid) {
+	public void setDeptid(Integer dept) {
 		this.deptid = deptid;
 	}
 

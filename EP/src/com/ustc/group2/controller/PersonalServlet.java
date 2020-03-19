@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 import com.ustc.group2.dao.AdminDao;
 import com.ustc.group2.domain.Admin;
@@ -19,6 +19,11 @@ import com.ustc.group2.domain.Admin;
  */
 public class PersonalServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -28,7 +33,7 @@ public class PersonalServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		HttpSession session = request.getSession();
+		
 		String method = request.getParameter("method");
 		if("toPersonalView".equals(method)){
 			personalView(request,response);
