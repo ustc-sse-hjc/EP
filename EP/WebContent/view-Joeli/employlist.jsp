@@ -36,10 +36,11 @@
  		        {field:'sex',title:'性别',width:40},
  		        {field:'workage',title:'工龄',width:40},
  		        {field:'salary',title:'工资',width:80},
- 		       	{field:'password',title:'密码',width:200},
+ 		       	{field:'password',title:'密码',width:120},
  		       	{field:'IC',title:'身份证号码',width:200},
  		       	{field:'type',title:'类别',width:80},
- 		        {field:'mobile',title:'联系电话',width:150},
+ 		        {field:'mobile',title:'联系电话',width:120},
+ 		       	{field:'email',title:'邮箱',width:150},
  		       	{field:'deptid',title:'所属部门',width:150, 
  		        	formatter: function(value,row,index){
  						if (row.deptid){
@@ -48,7 +49,7 @@
  								if(row.deptid == deptList[i].number)
  											return deptList[i].name;
  							}
- 							return row.deptid;
+ 							return deptid;
  						} else {
  							return 'not found';
  						}
@@ -58,13 +59,8 @@
 	 		]], 
 	        toolbar: "#toolbar",
 	        onBeforeLoad : function(){
-	        	try{
-	        		$("#deptList").combobox("getData")
-	        	}catch(err){
-	        		preLoaddept();
-	        	}
-	        	
-	        }
+		        		preLoaddept();
+		        }
 	    }); 
 	    //设置分页控件 
 	    var p = $('#dataList').datagrid('getPager'); 
@@ -97,18 +93,14 @@
             } else{
             	var numbers = [];
             	$(selectRows).each(function(i, row){
-            		numbers[i] = row.sn;
-            	});
-            	var ids = [];
-            	$(selectRows).each(function(i, row){
-            		ids[i] = row.id;
+            		numbers[i] = row.id;
             	});
             	$.messager.confirm("消息提醒", "将删除该员工所有数据，确认继续？", function(r){
             		if(r){
             			$.ajax({
 							type: "post",
-							url: "toemploylistServletServlet?method=DeleteEmploy",
-							data: {sns: numbers, ids: ids},
+							url: "toemploylistServlet?method=DeleteEmploy",
+							data: {numbers: numbers},
 							success: function(msg){
 								if(msg == "success"){
 									$.messager.alert("消息提醒","删除成功!","info");
@@ -210,18 +202,23 @@
 										//关闭窗口
 										$("#addDialog").dialog("close");
 										//清空原表格数据
-										$("#add_number").textbox('setValue', "");
+										$("#add_id").textbox('setValue', "");
 										$("#add_name").textbox('setValue', "");
 										$("#add_sex").textbox('setValue', "男");
-										$("#add_phone").textbox('setValue', "");
-										$("#add_dept").textbox('setValue', "");
+										$("#add_workage").textbox('setValue', "");
+										$("#add_salary").textbox('setValue', "");
+										$("#add_password").textbox('setValue', "");
+										$("#add_IC").textbox('setValue', "");
+										$("#add_type").textbox('setValue', "员工");
+										$("#add_mobile").textbox('setValue', "");
+										$("#add_email").textbox('setValue', "");
 										
 										//重新刷新页面数据
 										$('#dataList').datagrid("options").queryParams = {deptid: deptid};
 							  			$('#dataList').datagrid("reload");
 							  			setTimeout(function(){
 											$("#deptList").combobox('setValue', deptid);
-										}, 100);
+										}, 200);
 										
 									} else{
 										$.messager.alert("消息提醒","添加失败!","warning");
@@ -237,10 +234,14 @@
 					plain: true,
 					iconCls:'icon-reload',
 					handler:function(){
-						$("#add_number").textbox('setValue', "");
+						$("#add_id").textbox('setValue', "");
 						$("#add_name").textbox('setValue', "");
-						$("#add_phone").textbox('setValue', "");
-						$("#add_pos").textbox('setValue', "");
+						$("#add_workage").textbox('setValue', "");
+						$("#add_salary").textbox('setValue', "");
+						$("#add_password").textbox('setValue', "");
+						$("#add_IC").textbox('setValue', "");
+						$("#add_mobile").textbox('setValue', "");
+						$("#add_email").textbox('setValue', "");
 					}
 				},
 			]
@@ -304,24 +305,26 @@
 					handler:function(){
 						//清空表单
 						$("#edit_name").textbox('setValue', "");
-						$("#edit_sex").textbox('setValue', "男");
-						$("#edit_phone").textbox('setValue', "");
-						$("#edit_pos").textbox('setValue', "");
-						$("#edit_gradeList").combobox("clear");
-						$("#edit_gradeList").combobox("reload");
+						$("#edit_workage").textbox('setValue', "");
+						$("#edit_salary").textbox('setValue', "");
+						$("#edit_password").textbox('setValue', "");
+						$("#edit_mobile").textbox('setValue', "");
+						$("#edit_email").textbox('setValue', "");
 					}
 				}
 			],
 			onBeforeOpen: function(){
 				var selectRow = $("#dataList").datagrid("getSelected");
 				//设置值
+				$("#edit-id").val(selectRow.id);
 				$("#edit_name").textbox('setValue', selectRow.name);
 				$("#edit_sex").textbox('setValue', selectRow.sex);
+				$("#edit_workage").textbox('setValue', selectRow.workage);
+				$("#edit_salary").textbox('setValue', selectRow.salary);
+				$("#edit_password").textbox('setValue', selectRow.password);
+				$("#edit_type").textbox('setValue', selectRow.type);
 				$("#edit_mobile").textbox('setValue', selectRow.mobile);
-				$("#edit_pos").textbox('setValue', selectRow.pos);
-				$("#edit_photo").attr("src", "PhotoServlet?method=getPhoto&type=2&sid="+selectRow.id);
-				$("#edit-id").val(selectRow.id);
-				$("#set-photo-id").val(selectRow.id);
+				$("#edit_email").textbox('setValue', selectRow.email);
 				var deptid = selectRow.deptid;
 				setTimeout(function(){
 					$("#edit_deptList").combobox('setValue', deptid);
@@ -333,30 +336,10 @@
 	  	$("#search-btn").click(function(){
 	  		$('#dataList').datagrid('load',{
 	  			employName: $('#search_employ_name').val(),
-	  			deptid: $("#deptList").combobox('getValue') == '' ? 0 : $("#deptList").combobox('getValue')
-
+	  			deptid: $("#deptList").combobox('getValue')== '' ? 0 : $("#deptList").combobox('getValue')
 	  		});
 	  	});
 	});
-	//上传图片按钮事件
-	$("#upload-photo-btn").click(function(){
-		
-	});
-	function uploadPhoto(){
-		var action = $("#uploadForm").attr('action');
-		var pos = action.indexOf('sid');
-		if(pos != -1){
-			action = action.substring(0,pos-1);
-		}
-		$("#uploadForm").attr('action',action+'&sid='+$("#set-photo-id").val());
-		$("#uploadForm").submit();
-		setTimeout(function(){
-			var message =  $(window.frames["photo_target"].document).find("#message").text();
-			$.messager.alert("消息提醒",message,"info");
-			
-			$("#edit_photo").attr("src", "PhotoServlet?method=getPhoto&sid="+$("#set-photo-id").val());
-		}, 1500)
-	}
 	</script>
 </head>
 <body>
@@ -375,85 +358,121 @@
 		<div style="margin-left: 10px;margin-top:4px;" >部门：<input id="deptList" class="easyui-textbox" name="dept" />
 			<a id="search-btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
 		</div>
-	
 	</div>
 	
 	<!-- 添加员工窗口 -->
 	<div id="addDialog" style="padding: 10px">  
-		<div style="float: right; margin: 20px 20px 0 0; width: 200px; border: 1px solid #EBF3FF" id="photo">
-	    	<img alt="照片" style="max-width: 200px; max-height: 400px;" title="照片" src="PhotoServlet?method=getPhoto" />
-	    </div> 
     	<form id="addForm" method="post">
 	    	<table cellpadding="8" >
-	    		
 	    		<tr>
-	    			<td>姓名:</td>
-	    			<td><input id="add_name" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" name="name" data-options="required:true, missingMessage:'请填写姓名'" /></td>
+	    			<td>工号:</td>
+	    			<td><input id="add_id" name="id" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" data-options="required:true, missingMessage:'请填写工号'" /></td>
 	    		</tr>
 	    		<tr>
-	    			<td>密码:</td>
+	    			<td>姓名:</td>
 	    			<td>
-	    				<input id="add_password"  class="easyui-textbox" style="width: 200px; height: 30px;" type="password" name="password" data-options="required:true, missingMessage:'请输入登录密码'" />
+	    				<input id="add_name" name="name"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" data-options="required:true, missingMessage:'请输入姓名'" />
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>性别:</td>
-	    			<td><select id="add_sex" class="easyui-combobox" data-options="editable: false, panelHeight: 50, width: 60, height: 30" name="sex"><option value="男">男</option><option value="女">女</option></select></td>
+	    			<td><select id="add_sex" name="sex" class="easyui-combobox" data-options="editable: false, panelHeight: 50, width: 60, height: 30" ><option value="男">男</option><option value="女">女</option></select></td>
 	    		</tr>
 	    		<tr>
-	    			<td>电话:</td>
-	    			<td><input id="add_phone" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" name="mobile" validType="mobile" /></td>
+	    			<td>工龄:</td>
+	    			<td>
+	    				<input id="add_workage" name="workage"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" data-options="required:true, missingMessage:'请输入工龄'" />
+	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>部门:</td>
-	    			<td><input id="add_pos" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" name="pos" validType="number" /></td>
+	    			<td>工资:</td>
+	    			<td>
+	    				<input id="add_salary" name="salary"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" data-options="required:true, missingMessage:'请输入工资'" />
+	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>部门:</td>
-	    			<td><input id="add_deptList" style="width: 200px; height: 30px;" class="easyui-textbox" name="deptid" /></td>
+	    			<td>密码:</td>
+	    			<td>
+	    				<input id="add_password"  name="password" class="easyui-textbox" style="width: 200px; height: 30px;" type="password" data-options="required:true, missingMessage:'请输入登录密码'" />
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>身份证号码:</td>
+	    			<td>
+	    				<input id="add_IC" name="IC"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" data-options="required:true, missingMessage:'请输入身份证号码'" />
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>类别:</td>
+	    			<td><select id="add_type" name="type" class="easyui-combobox" data-options="editable: false, panelHeight: 50, width: 60, height: 30" ><option value="员工">员工</option><option value="管理员">管理员</option><option value="领导">领导</option></select></td>
+	    		</tr>
+	    		<tr>
+	    			<td>联系电话:</td>
+	    			<td><input id="add_mobile" name="mobile" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" validType="mobile" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>邮箱:</td>
+	    			<td><input id="add_email" name="email" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" validType="email"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td>所属部门:</td>
+	    			<td><input id="add_deptList" name="deptid" style="width: 200px; height: 30px;" class="easyui-textbox" /></td>
 	    		</tr>
 	    	</table>
 	    </form>
 	</div>
 	
 	<!-- 修改员工窗口 -->
-	<div id="editDialog" style="padding: 10px">
-		<div style="float: right; margin: 20px 20px 0 0; width: 200px; border: 1px solid #EBF3FF">
-	    	<img id="edit_photo" alt="照片" style="max-width: 200px; max-height: 400px;" title="照片" src="" />
-	    	<form id="uploadForm" method="post" enctype="multipart/form-data" action="PhotoServlet?method=SetPhoto" target="photo_target">
-	    		<!-- toemploylistServlet?method=SetPhoto -->
-	    		<input type="hidden" name="sid" id="set-photo-id">
-		    	<input class="easyui-filebox" name="photo" data-options="prompt:'选择照片'" style="width:200px;">
-		    	<input id="upload-photo-btn" onClick="uploadPhoto()" class="easyui-linkbutton" style="width: 50px; height: 24px;" type="button" value="上传"/>
-		    </form>
-	    </div>   
+	<div id="editDialog" style="padding: 10px">  
     	<form id="editForm" method="post">
-	    	<input type="hidden" name="id" id="edit-id">
+    	<input type="hidden" name="id" id="edit-id">
 	    	<table cellpadding="8" >
 	    		<tr>
 	    			<td>姓名:</td>
-	    			<td><input id="edit_name" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" name="name" data-options="required:true, missingMessage:'请填写姓名'" /></td>
+	    			<td>
+	    				<input id="edit_name" name="name"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" data-options="required:true, missingMessage:'请输入姓名'" />
+	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>性别:</td>
-	    			<td><select id="edit_sex" class="easyui-combobox" data-options="editable: false, panelHeight: 50, width: 60, height: 30" name="sex"><option value="男">男</option><option value="女">女</option></select></td>
+	    			<td><select id="edit_sex" name="sex" class="easyui-combobox" data-options="editable: false, panelHeight: 50, width: 60, height: 30" ><option value="男">男</option><option value="女">女</option></select></td>
 	    		</tr>
 	    		<tr>
-	    			<td>电话:</td>
-	    			<td><input id="edit_mobile" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" name="mobile" validType="mobile" /></td>
+	    			<td>工龄:</td>
+	    			<td>
+	    				<input id="edit_workage" name="workage"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" data-options="required:true, missingMessage:'请输入工龄'" />
+	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>部门:</td>
-	    			<td><input id="edit_dept" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" name="dept" validType="number" /></td>
+	    			<td>工资:</td>
+	    			<td>
+	    				<input id="edit_salary" name="salary"  class="easyui-textbox" style="width: 200px; height: 30px;" type="text" data-options="required:true, missingMessage:'请输入工资'" />
+	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>部门:</td>
-	    			<td><input id="edit_deptList" style="width: 200px; height: 30px;" class="easyui-textbox" name="deptid" /></td>
+	    			<td>密码:</td>
+	    			<td>
+	    				<input id="edit_password"  name="password" class="easyui-textbox" style="width: 200px; height: 30px;" type="password" data-options="required:true, missingMessage:'请输入登录密码'" />
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>类别:</td>
+	    			<td><select id="edit_type" name="type" class="easyui-combobox" data-options="editable: false, panelHeight: 50, width: 60, height: 30" ><option value="员工">员工</option><option value="管理员">管理员</option><option value="领导">领导</option></select></td>
+	    		</tr>
+	    		<tr>
+	    			<td>联系电话:</td>
+	    			<td><input id="edit_mobile" name="mobile" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" validType="mobile" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>邮箱:</td>
+	    			<td><input id="edit_email" name="email" style="width: 200px; height: 30px;" class="easyui-textbox" type="text" validType="email"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td>所属部门:</td>
+	    			<td><input id="edit_deptList" name="deptid" style="width: 200px; height: 30px;" class="easyui-textbox" /></td>
 	    		</tr>
 	    	</table>
 	    </form>
 	</div>
-<!-- 提交表单处理iframe框架 -->
-	<iframe id="photo_target" name="photo_target"></iframe>  
 </body>
 </html>

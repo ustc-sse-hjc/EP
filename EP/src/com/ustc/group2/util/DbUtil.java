@@ -12,8 +12,8 @@ import java.sql.SQLException;
 
 public class DbUtil {
 	private String dbUrl="jdbc:mysql://localhost:3306/Group2?useUnicode=true&characterEncoding=UTF-8";
-	private String dbUer="lcg";
-	private String dbPassword="guo5251314";
+	private String dbUer="root";
+	private String dbPassword="19971028";
 	private String jdbcName="com.mysql.jdbc.Driver";
 	private Connection connection=null;
 	
@@ -30,11 +30,7 @@ public class DbUtil {
 	public void closeCon(){
 		try{
 			if(connection !=null)
-			{
-				connection.close();
-				System.out.println("数据连接关闭");
-			} 
-			
+				 connection.close();
 	}catch(SQLException e){
 		e.printStackTrace();
 	}

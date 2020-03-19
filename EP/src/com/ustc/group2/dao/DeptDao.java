@@ -35,7 +35,7 @@ public class DeptDao extends BaseDao {
 		try {
 			while(resultSet.next()){
 				Dept d1 = new Dept();
-				d1.setNumber(resultSet.getInt("Number"));
+				d1.setNumber(resultSet.getInt("number"));
 				d1.setId(resultSet.getString("id"));
 				d1.setName(resultSet.getString("name"));
 				d1.setleader(resultSet.getString("leader"));
@@ -49,7 +49,7 @@ public class DeptDao extends BaseDao {
 	
 	public boolean editDept(Dept dept) {
 		
-		String sql = "update dept set id = '"+dept.getId()+"',name = '"+dept.getName()+"',leader = '"+dept.getleader()+"' where Number = " + dept.getNumber();
+		String sql = "update dept set id = '"+dept.getId()+"',name = '"+dept.getName()+"',leader = '"+dept.getleader()+"' where number = " + dept.getNumber();
 		return update(sql);
 	}
 	

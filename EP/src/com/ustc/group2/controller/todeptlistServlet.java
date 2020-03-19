@@ -25,12 +25,6 @@ import net.sf.json.JsonConfig;
  */
 public class todeptlistServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -142,10 +136,6 @@ public class todeptlistServlet extends HttpServlet {
 		List<Dept> deptList = deptDao.getDeptList(dept,new Page(currentPage, pageSize));
 		int total = deptDao.getDeptListTotal(dept);
 		deptDao.closeCon();
-		JsonConfig jsonConfig = new JsonConfig();
-		String deptlistString = JSONArray.fromObject(deptList,jsonConfig).toString();//将list转化为字符串
-		System.out.println(deptlistString);
-		
 		response.setCharacterEncoding("UTF-8");
 		Map<String, Object> ret = new HashMap<String, Object>();
 		ret.put("total", total);
@@ -160,7 +150,6 @@ public class todeptlistServlet extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 }
 

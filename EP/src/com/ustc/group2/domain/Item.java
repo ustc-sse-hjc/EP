@@ -7,6 +7,7 @@ public class Item {
 	private String goal;
 	private Integer point;
 	private String comment;
+	private String quarter;
 	
 	public Integer getNumber() {
 		return number;
@@ -43,6 +44,12 @@ public class Item {
 	}
 	public void setItem(String item) {
 		this.item = item;
+	}
+	public String getQuarter() {
+		return quarter;
+	}
+	public void setQuarter(String quarter) {
+		this.quarter = quarter;
 	}
 
 	
