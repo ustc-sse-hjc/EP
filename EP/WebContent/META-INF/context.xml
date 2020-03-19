@@ -6,13 +6,8 @@
 	driverClassName = "com.mysql.jdbc.Driver"
 	maxIdle="2"
 	maxWait = "5000"
-<<<<<<< HEAD
 	username = "root"
 	password = "19971028"
-=======
-	username = "lcg"
-	password = "guo5251314"
->>>>>>> b68fa9a17d1ce64f6ece0b2e9623bd34cd0803cf
 	url = "jdbc:mysql://localhost:3306/Group2?useUnicode=true&amp;characterEncoding=UTF-8"
 	maxActive = "4"/>
 </Context>

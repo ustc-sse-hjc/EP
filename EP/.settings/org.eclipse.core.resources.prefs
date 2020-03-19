@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 #Fri Feb 28 20:16:54 CST 2020
-=======
->>>>>>> b68fa9a17d1ce64f6ece0b2e9623bd34cd0803cf
 eclipse.preferences.version=1
 encoding//src/com/ustc/group2/controller/LoginServlet.java=UTF-8
 encoding//src/com/ustc/group2/controller/PersonalServlet.java=UTF-8
 encoding//src/com/ustc/group2/dao/BaseDao.java=UTF-8
-<<<<<<< HEAD
-=======
-encoding//src/com/ustc/group2/util/DbUtil.java=UTF-8
->>>>>>> b68fa9a17d1ce64f6ece0b2e9623bd34cd0803cf
 encoding/<project>=UTF-8

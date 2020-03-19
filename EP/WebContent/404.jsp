@@ -5,13 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>不好意思您访问的页面不存在</title>
-<<<<<<< HEAD
 <link href="h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="h-ui/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
-=======
-<link href="/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="/h-ui/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
->>>>>>> b68fa9a17d1ce64f6ece0b2e9623bd34cd0803cf
 </head>
 <body>
 	<div class="page-404 text-c">
